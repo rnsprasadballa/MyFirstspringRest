@@ -47,5 +47,11 @@
                 <prop key="hibernate.show_sql">true</prop>
             </props>
         </property>
-    </bean> 
+    </bean>
+    <bean name="userAccountDao" class="com.prasad.spring.restful.persistence.dao.UserAccountHibernateDao">
+    	<property name="sessionFactory" ref="hibernate4AnnotatedSessionFactory" />
+    </bean>
+    <!-- <bean name="userAccountBusiness" class="com.prasad.spring.restful.business.DefaultUserAccountBusiness" >
+    	<property name="userAccountDao" ref="userAccountDao" />
+    </bean> -->
 </beans>

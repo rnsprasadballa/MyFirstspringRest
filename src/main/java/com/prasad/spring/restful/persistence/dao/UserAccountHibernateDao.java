@@ -6,8 +6,9 @@ package com.prasad.spring.restful.persistence.dao;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-import com.prasad.spring.restful.model.Status;
 import com.prasad.spring.restful.persistence.entity.UserAccount;
 
 /**
@@ -16,6 +17,7 @@ import com.prasad.spring.restful.persistence.entity.UserAccount;
  */
 public class UserAccountHibernateDao implements UserAccountDao
 {
+	private static final Logger LOGGER = LoggerFactory.getLogger(UserAccountHibernateDao.class);
 	private SessionFactory sessionFactory;
 
 	public SessionFactory getSessionFactory() {
@@ -26,21 +28,22 @@ public class UserAccountHibernateDao implements UserAccountDao
 		this.sessionFactory = sessionFactory;
 	}
 
-	public Status saveUserAccountInformation(UserAccount useraccount)
+	public UserAccount saveUserAccountInformation(UserAccount useraccount)
 	{
+		UserAccount user = null;
 		try
 		{
 			Session session = getSessionFactory().openSession();
 			Transaction tx = session.beginTransaction();
-			session.save(useraccount);
+			user = (UserAccount) session.save(useraccount);
 			tx.commit();
 			session.close();
 		}
 		catch(Exception ex)
 		{
-			return Status.DATA_ERROR;
+			LOGGER.error("Error in saving user data");
 		}
-		return Status.SUCCESS;
+		return user;
 	}
 
 }

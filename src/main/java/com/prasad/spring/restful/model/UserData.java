@@ -5,6 +5,7 @@ import java.io.Serializable;
 public class UserData implements Serializable
 {
 	private static final long serialVersionUID = 1L;
+	private Integer userAccountId;
 	private String firstName;
 	private String lastName;
 	private String email;
@@ -13,6 +14,12 @@ public class UserData implements Serializable
 	private String userId;
 	private String password;
 
+	public Integer getUserAccountId() {
+		return userAccountId;
+	}
+	public void setUserAccountId(Integer userAccountId) {
+		this.userAccountId = userAccountId;
+	}
 	public String getFirstName() {
 		return firstName;
 	}
